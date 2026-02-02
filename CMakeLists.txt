@@ -1,2 +1,29 @@
 
-cmake_minimum_required(VERSION 4.2.0)
+cmake_minimum_required(VERSION 4.2)
+
+set(SK_ENGINE_TARGET_NAME "sketch-engine" CACHE INTERNAL "")
+
+set(SK_ENGINE_VERSION_MAJOR 1 CACHE INTERNAL "")
+set(SK_ENGINE_VERSION_MINOR 0 CACHE INTERNAL "")
+
+file(GLOB_RECURSE SK_ENGINE_HEADER_FILES
+    "include/*.h"
+    "include/*.hpp"
+)
+
+file(GLOB_RECURSE SK_ENGINE_SOURCE_FILES
+    "source/*.c"
+    "source/*.cpp"
+)
+
+add_library(${SK_ENGINE_TARGET_NAME} SHARED
+    ${SK_ENGINE_HEADER_FILES} ${SK_ENGINE_SOURCE_FILES})
+
+add_library(sketch::engine ALIAS ${SK_ENGINE_TARGET_NAME})
+
+set_property(TARGET ${SK_ENGINE_TARGET_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${SK_ENGINE_TARGET_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
+
+target_include_directories(${SK_ENGINE_TARGET_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
