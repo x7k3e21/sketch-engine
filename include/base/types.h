@@ -1,9 +1,9 @@
 
 /**
- * @file types.h
+ * @file base/types.h
  * @brief Platform-independent basic type definitions with exact widths
  * 
- * @version 1.0
+ * @version 2.0
  * 
  * @author x7k3e21
  * @date 2026-01-10
